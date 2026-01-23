@@ -25,7 +25,13 @@ from xarp.commands.sensing import (
     DepthCommand,
     VirtualImageCommand,
 )
-from xarp.commands.ui import WriteCommand, SayCommand, ReadCommand, PassthroughCommand
+from xarp.commands.ui import (
+    WriteCommand,
+    BaselineCodeCommand,
+    SayCommand,
+    ReadCommand,
+    PassthroughCommand,
+)
 from xarp.data_models import DeviceInfo, Hands
 from xarp.entities import ImageAsset, Asset, Element, GLBAsset, TextAsset, DefaultAssets
 from xarp.remote import RemoteXRClient
@@ -68,6 +74,17 @@ class AsyncXR:
             None.
         """
         await self._execute_none(WriteCommand(text=text, title=title))
+
+    async def baseline_code(self, code: str) -> None:
+        """Displays a baseline code snippet.
+
+        Args:
+            code: Code content to display.
+
+        Returns:
+            None.
+        """
+        await self._execute_none(BaselineCodeCommand(code=code))
 
     async def say(self, text: str, title: str | None = None) -> None:
         """Displays a text message and triggers synthesized speech. Resolves when speech playback completes.
@@ -316,6 +333,9 @@ class SyncXR(AsyncXR):
     # ---- UI ----
     def write(self, text: str, title: str | None = None) -> None:
         return self._sync(super().write(text=text, title=title))
+
+    def baseline_code(self, code: str) -> None:
+        return self._sync(super().baseline_code(code=code))
 
     def say(self, text: str, title: str | None = None) -> None:
         return self._sync(super().say(text=text, title=title))

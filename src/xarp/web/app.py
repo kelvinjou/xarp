@@ -128,6 +128,12 @@ if top.toggle('connect'):
                 chat.append(msg)
                 outbound.put_nowait('')
                 executed.add(i)
+            case 'baseline_code':
+                text = '\n'.join(map(str, xr_cmd.args))
+                msg = ChatMessage.from_assistant(text.strip())
+                chat.append(msg)
+                outbound.put_nowait('')
+                executed.add(i)
             case 'read':
                 if text := bottom.chat_input(key=f'chat_input_{xr_cmd.ts}'):
                     msg = ChatMessage.from_user(text)

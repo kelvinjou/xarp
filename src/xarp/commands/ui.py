@@ -9,6 +9,11 @@ class WriteCommand(Command):
     title: str | None = None
 
 
+class BaselineCodeCommand(Command):
+    cmd: Literal["baseline_code"] = Field(default="baseline_code", frozen=True)
+    code: str
+
+
 class SayCommand(WriteCommand):
     cmd: Literal["say"] = Field(default="say", frozen=True)
 

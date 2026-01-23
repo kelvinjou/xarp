@@ -23,6 +23,7 @@ XRAgentApp = Callable[[SyncXR, MultiStepAgent, dict[str, Any]], None]
 _ALLOWED_TOOLS = (
     "info",
     "write",
+    "baseline_code",
     "say",
     "read",
     "passthrough",
