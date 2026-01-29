@@ -20,7 +20,7 @@ from xarp.settings import settings
 
 XRAgentApp = Callable[[SyncXR, MultiStepAgent, dict[str, Any]], None]
 
-_ALLOWED_TOOLS = (
+_DEFAULT_ALLOWED_TOOLS = (
     "info",
     "write",
     "baseline_code",
@@ -72,25 +72,29 @@ class ImageAssetToolInterceptor:
         agent.step_callbacks.register(ActionStep, interceptor.provide_observations)
 
 
-def _get_public_methods(obj) -> list[tuple[str, Any]]:
+def _get_public_methods(obj, allowed_tools: tuple[str, ...] | None = None) -> list[tuple[str, Any]]:
+    if allowed_tools is None:
+        allowed_tools = _DEFAULT_ALLOWED_TOOLS
+    
     public_methods = []
     for pair in inspect.getmembers(obj, inspect.ismethod):
         name = pair[0]
-        if not name.startswith("_") and name in _ALLOWED_TOOLS:
+        if not name.startswith("_") and name in allowed_tools:
             public_methods.append(pair)
     return public_methods
 
 
-def as_agent_tools(xr: SyncXR) -> list[Tool]:
-    tools = [tool(member) for name, member in _get_public_methods(xr)]
+def as_agent_tools(xr: SyncXR, allowed_tools: tuple[str, ...] | None = None) -> list[Tool]:
+    tools = [tool(member) for name, member in _get_public_methods(xr, allowed_tools)]
     return tools
 
 
-def run_xr_agent(xr_agent_app: XRAgentApp, model, **kwargs) -> None:
+def run_xr_agent(xr_agent_app: XRAgentApp, model, allowed_tools: tuple[str, ...] | list[str] | None = None, **kwargs) -> None:
     async def _with_agent(axr: AsyncXR, params: dict[str, Any]) -> None:
         loop = asyncio.get_running_loop()
-        loop_thread = threading.current_thread()
-        sxr = SyncSimpleXR(axr.remote, loop, loop_thread)
+        tools_filter = tuple(allowed_tools) if allowed_tools is not None else None
+        agent = CodeAgent(
+            tools=as_agent_tools(sxr, tools_filtete, loop, loop_thread)
 
         agent = CodeAgent(
             tools=as_agent_tools(sxr),
