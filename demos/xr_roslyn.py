@@ -6,11 +6,13 @@ from xarp.server import show_qrcode_link
 
 import os
 api_key = os.getenv('OPENAI_API_KEY')
+lm_studio = os.getenv('LM_STUDIO_KEY')
+model_id = "mistralai/devstral-small-2-2512"
 
 model = OpenAIServerModel(
-    model_id="gpt-5-mini",
-    api_key=api_key,
-    
+    model_id=model_id,
+    api_key=lm_studio,
+    api_base="http://128.111.28.74:1234/v1"
     # api_key="lm-studio",
     # api_base="http://192.168.4.71:1234/v1" # api_base="http://169.254.167.39:1234/v1" # optional (use if custom endpoint)
 
@@ -21,11 +23,6 @@ You are an agent with extended reality tools. You can sense the environment and 
 Before asking me about for extra information, use your tools to understand the context.
 The user cannot read the output of "print" functions, use the "write" or "say" tools instead.
 
-When using the baseline_code tool, call it directly with the C# code string inline:
-baseline_code('''
-using UnityEngine;
-// Your C# code here
-''')
 
 Do NOT create intermediate variables like csharp = "..." before calling baseline_code.
 """

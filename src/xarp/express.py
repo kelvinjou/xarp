@@ -81,6 +81,11 @@ class AsyncXR:
         Use this to generate and run C# scripts that implement XR functionality such as object detection,
         spatial anchoring, UI overlays, hand tracking responses, and dynamic scene manipulation. The code
         should use Unity/MRTK APIs and will be compiled and executed in real-time on the device.
+        When using this tool, call it directly with the C# code string inline:
+        baseline_code('''
+        using UnityEngine;
+        // Your C# code here
+        ''')
 
         Args:
             code: Complete C# code implementing the desired XR behavior. Should include:
