@@ -75,29 +75,57 @@ class AsyncXR:
         """
         await self._execute_none(WriteCommand(text=text, title=title))
 
-    async def baseline_code(self, code: str) -> None:
-        """Compiles and executes C# code in the XR environment to create interactive AR/VR experiences.
-        
-        Use this to generate and run C# scripts that implement XR functionality such as object detection,
-        spatial anchoring, UI overlays, hand tracking responses, and dynamic scene manipulation. The code
-        should use Unity/MRTK APIs and will be compiled and executed in real-time on the device.
-        When using this tool, call it directly with the C# code string inline:
+    async def baseline_code(self, code: str) -> str:
+        """
+        Compiles and executes a self-contained Unity C# script in an XR/AR/VR scene.
+
+        CRITICAL REQUIREMENTS (non-negotiable):
+        - The script must perform the requested action by creating and/or modifying scene objects.
+        - Do not output checker/validation-only scripts (e.g., GameObject.Find + Debug.Log).
+        - If a required object or component does not exist, create a reasonable stand-in.
+        - Execution must cause an immediate, observable scene change. Debug.Log is encouraged for diagnostics, but is not sufficient by itself.
+        - Code must be self-contained and compilable: include using statements, class definitions, and an instantiation line at the end.
+        - Return only C# code (no markdown, no explanations).
+
+        SIDE EFFECTS / IDEMPOTENCY (CRITICAL):
+        - The script must be idempotent across repeated executions.
+        - Do not create duplicates.
+        - Reuse and update existing objects identified by stable names, tags, or marker components.
+        - Create only the minimum number of objects needed to satisfy the request.
+
+        ALLOWED / RECOMMENDED PRACTICES:
+        - Use Unity lifecycle methods (Awake/Start/Update) as needed.
+        - Use Physics.Raycast / overlap queries / XR/AR APIs if available to sense the environment.
+        - Optional anchoring: if a platform anchor component type exists in the project, attach it; otherwise no-op (do not fail).
+        - Avoid brittle dependencies. Prefer graceful fallbacks if sensors/surfaces are unavailable.
+
+        OUTPUT SHAPE (general template):
+        - using UnityEngine; (+ any needed namespaces)
+        - public class <TaskBehaviour> : MonoBehaviour { ... }
+        - new GameObject("<RunnerName>").AddComponent<<TaskBehaviour>>();
+
+        CALL STYLE:
+        Call baseline_code directly with the full C# source inline:
         baseline_code('''
         using UnityEngine;
-        // Your C# code here
+        public class MyBehaviour : MonoBehaviour { ... }
+        new GameObject("ToolRunner").AddComponent<MyBehaviour>();
         ''')
+        Do NOT create intermediate variables like csharp = "..." before calling baseline_code.
+
+        CODEAGENT OUTPUT CONTRACT:
+        - Return only valid Python code (no prose, no lists, no explanations).
+        - Emit exactly one baseline_code(...) call.
+        - The C# source must be fully contained inside a triple-quoted Python string.
 
         Args:
-            code: Complete C# code implementing the desired XR behavior. Should include:
-                  - using statements (e.g., 'using UnityEngine;')
-                  - MonoBehaviour class definitions with Unity lifecycle methods (Awake, Update, etc.)
-                  - Instantiation code at the end to create and attach components to a GameObject
-                  Example pattern: Define classes, then instantiate with 'new GameObject("Name").AddComponent<YourClass>()'
+        code: Complete C# source implementing the requested XR behavior.
 
         Returns:
-            None.
+            A string containing compilation/execution results or debug output.
         """
-        await self._execute_none(BaselineCodeCommand(code=code))
+        # A string containing the result, success message, or debug output from Roslyn compilation.
+        return await self._execute_single(BaselineCodeCommand(code=code))
 
     async def say(self, text: str, title: str | None = None) -> None:
         """Displays a text message and triggers synthesized speech. Resolves when speech playback completes.
@@ -347,7 +375,7 @@ class SyncXR(AsyncXR):
     def write(self, text: str, title: str | None = None) -> None:
         return self._sync(super().write(text=text, title=title))
 
-    def baseline_code(self, code: str) -> None:
+    def baseline_code(self, code: str) -> str:
         return self._sync(super().baseline_code(code=code))
 
     def say(self, text: str, title: str | None = None) -> None:
