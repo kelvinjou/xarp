@@ -8,8 +8,7 @@ import os
 api_key = os.getenv('OPENAI_API_KEY')
 
 model = OpenAIServerModel(
-    # model_id="gpt-5-mini",
-    model_id="glm-4.6v-flash",
+    model_id="gpt-5-mini",
     api_key=api_key,
     
     # api_key="lm-studio",
@@ -21,6 +20,14 @@ custom_system_prompt = """
 You are an agent with extended reality tools. You can sense the environment and display information.
 Before asking me about for extra information, use your tools to understand the context.
 The user cannot read the output of "print" functions, use the "write" or "say" tools instead.
+
+When using the baseline_code tool, call it directly with the C# code string inline:
+baseline_code('''
+using UnityEngine;
+// Your C# code here
+''')
+
+Do NOT create intermediate variables like csharp = "..." before calling baseline_code.
 """
 
 def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
@@ -28,23 +35,29 @@ def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
     xr.image().obj.show()
     while True:
         xr.say("How can I help you?")
-        # request = xr.read()
-        request = """
-        Place a medicine bottle and an everyday portable object such as a backpack in the user’s environment
-        and start continuous sensing of RGB, depth, head pose, and hand pose. The system detects and labels
-        both objects and overlays anchored prompts reading "Medicine bottle detected. Select for guidance." and
-        "Backpack detected. Select for assistance." When the user selects the medicine bottle, the system displays
-        context-aware text anchored to the bottle such as "Check dosage and timing before use," followed by an option
-        to step through dosage instructions. When the user selects the backpack, the system displays an anchored message
-        like "Need help preparing this item?" and, upon selection, shows task-oriented guidance such as "Suggested items
-        based on context: laptop, charger, notebook." Successful execution demonstrates multi-object detection, object-specific
-        semantic reasoning, context-dependent instruction generation, and dynamic updating of AR text anchored to different
-        physical objects. You can choose different objects as long as you show case at least two.
-        """
+        # xr.depth().obj.show()
+        request = xr.read()
+
+        # request = """Place 2 rotating gray cubes in front of me."""
+        request = """Anchor a box to the floor in front of me, and one to the ceiling."""
+        # request = """
+        # Place a medicine bottle and an everyday portable object such as a backpack in the user’s environment
+        # and start continuous sensing of RGB, depth, head pose, and hand pose. The system detects and labels
+        # both objects and overlays anchored prompts reading "Medicine bottle detected. Select for guidance." and
+        # "Backpack detected. Select for assistance." When the user selects the medicine bottle, the system displays
+        # context-aware text anchored to the bottle such as "Check dosage and timing before use," followed by an option
+        # to step through dosage instructions. When the user selects the backpack, the system displays an anchored message
+        # like "Need help preparing this item?" and, upon selection, shows task-oriented guidance such as "Suggested items
+        # based on context: laptop, charger, notebook." Successful execution demonstrates multi-object detection, object-specific
+        # semantic reasoning, context-dependent instruction generation, and dynamic updating of AR text anchored to different
+        # physical objects. You can choose different objects as long as you show case at least two.
+        # """
+
         answer = agent.run(request)
         xr.write(answer)
 
 
 if __name__ == '__main__':
     show_qrcode_link()
-    run_xr_agent(xr_agent_app, model, allowed_tools=["baseline_code"])
+    # run_xr_agent(xr_agent_app, model, allowed_tools=["baseline_code"])
+    run_xr_agent(xr_agent_app, model)

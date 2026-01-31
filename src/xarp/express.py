@@ -76,10 +76,18 @@ class AsyncXR:
         await self._execute_none(WriteCommand(text=text, title=title))
 
     async def baseline_code(self, code: str) -> None:
-        """Displays a baseline code snippet.
+        """Compiles and executes C# code in the XR environment to create interactive AR/VR experiences.
+        
+        Use this to generate and run C# scripts that implement XR functionality such as object detection,
+        spatial anchoring, UI overlays, hand tracking responses, and dynamic scene manipulation. The code
+        should use Unity/MRTK APIs and will be compiled and executed in real-time on the device.
 
         Args:
-            code: Code content to display.
+            code: Complete C# code implementing the desired XR behavior. Should include:
+                  - using statements (e.g., 'using UnityEngine;')
+                  - MonoBehaviour class definitions with Unity lifecycle methods (Awake, Update, etc.)
+                  - Instantiation code at the end to create and attach components to a GameObject
+                  Example pattern: Define classes, then instantiate with 'new GameObject("Name").AddComponent<YourClass>()'
 
         Returns:
             None.

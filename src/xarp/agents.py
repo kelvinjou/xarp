@@ -92,12 +92,12 @@ def as_agent_tools(xr: SyncXR, allowed_tools: tuple[str, ...] | None = None) -> 
 def run_xr_agent(xr_agent_app: XRAgentApp, model, allowed_tools: tuple[str, ...] | list[str] | None = None, **kwargs) -> None:
     async def _with_agent(axr: AsyncXR, params: dict[str, Any]) -> None:
         loop = asyncio.get_running_loop()
+        loop_thread = threading.current_thread()
+        sxr = SyncSimpleXR(axr.remote, loop, loop_thread)
+
         tools_filter = tuple(allowed_tools) if allowed_tools is not None else None
         agent = CodeAgent(
-            tools=as_agent_tools(sxr, tools_filtete, loop, loop_thread)
-
-        agent = CodeAgent(
-            tools=as_agent_tools(sxr),
+            tools=as_agent_tools(sxr, tools_filter),
             model=model,
             **kwargs
         )

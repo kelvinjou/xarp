@@ -11,3 +11,6 @@ wheels/
 /.idea
 *.glb
 *.env
+
+# log files
+/demos/logs/
