@@ -26,12 +26,10 @@ def getModel(current_model):
     )
 
 
-# Set your starting index here (0-based)
-input_csv_start_idx = 1 # starts from idx=0 CHANGE THIS IF NEEDED
-num_rows = 2 # automated workflow only processes start + n scenarios
-
 # Global variables to track current scenario
-current_pk = 0
+start_pk = 3  # starting pk value (not row index)
+num_rows = 2  # automated workflow only processes start + n scenarios
+
 current_request = ""
 current_mode = ""
 current_model = ""
@@ -72,11 +70,13 @@ def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
     xr.say("Starting scenario...")
     answer = agent.run(current_request, return_full_result=True)
     
-    # Create rows for each step
-    step_rows = []
+    # Append each step to CSV immediately after processing
+    results_path = 'demos/results.csv'
+    needs_header = not os.path.exists(results_path)
+    steps_logged = 0
     for step_dict in answer.steps:
         if 'token_usage' in step_dict and step_dict['token_usage']:
-            step_rows.append({
+            row = {
                 'pk': current_pk,
                 'mode': current_mode,
                 'model': current_model,
@@ -85,14 +85,17 @@ def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
                 'input_tokens': step_dict['token_usage']['input_tokens'],
                 'output_tokens': step_dict['token_usage']['output_tokens'],
                 'duration': step_dict['timing']['duration']
-            })
+            }
+            pd.DataFrame([row]).to_csv(
+                results_path,
+                mode='a',
+                header=needs_header,
+                index=False
+            )
+            needs_header = False
+            steps_logged += 1
     
-    # Create DataFrame and append to CSV
-    if step_rows:
-        results_df = pd.DataFrame(step_rows)
-        results_df.to_csv('demos/results.csv', mode='a', header=not os.path.exists('demos/results.csv'), index=False)
-    
-    xr.write(f"Scenario {current_pk} completed! {len(step_rows)} steps logged.")
+    xr.write(f"Scenario {current_pk} completed! {steps_logged} steps logged.")
     
     print(f"Scenario {current_pk} execution complete.")
     sys.exit(0)
@@ -141,10 +144,37 @@ def run_scenario(pk, scenario_text, mode, model_name):
             print(current_mode)
             if current_mode == "xarp":
                 show_qrcode_link()
-            if current_mode == "xarp":
-                run_xr_agent(xr_agent_app, getModel(current_model=current_model))
+                run_xr_agent(
+                    xr_agent_app,
+                    getModel(current_model=current_model),
+                    allowed_tools=[
+                        "info",
+                        "write",
+                        "say",
+                        "read",
+                        "passthrough",
+                        "image",
+                        "virtual_image",
+                        "depth",
+                        "eye",
+                        "head",
+                        "hands",
+                        "list_assets",
+                        "list_elements",
+                        "destroy_element",
+                        "create_or_update_glb",
+                        "create_or_update_label",
+                        "create_or_update_cube",
+                        "create_or_update_sphere",
+                        "create_or_update_image"
+                    ],
+                )
             else:
-                run_xr_agent(xr_agent_app, getModel(current_model=current_model), allowed_tools=["baseline_code"])
+                run_xr_agent(
+                    xr_agent_app,
+                    getModel(current_model=current_model),
+                    allowed_tools=["baseline_code"],
+                )
         except SystemExit:
             pass  # Normal exit from xr_agent_app
         finally:
@@ -165,8 +195,9 @@ if __name__ == '__main__':
     df['Scenario'] = df['Scenario'].str.strip()
     df['Mode'] = df['Mode'].astype(str).str.strip()
     
-    # Iterate through the desired slice only
-    for i, (idx, row) in enumerate(df.iloc[input_csv_start_idx:input_csv_start_idx+num_rows].iterrows()):
+    # Iterate through pk-based slice
+    slice_df = df[df['pk'].astype(int) >= int(start_pk)].head(num_rows)
+    for i, (idx, row) in enumerate(slice_df.iterrows()):
         pk_value = row.get('pk')
         if pk_value is None or (isinstance(pk_value, float) and pd.isna(pk_value)):
             raise ValueError("Missing pk value for scenario row; cannot map output without pk.")
@@ -177,7 +208,7 @@ if __name__ == '__main__':
         
         
         print(f"\n{'='*80}")
-        print(f"Starting Scenario {i + 1}/{len(df)} (pk={pk})")
+        print(f"Starting Scenario {i + 1}/{len(slice_df)} (pk={pk})")
         print(f"Mode: {mode}, Model: {model_name}")
         print(f"{'='*80}\n")
         
