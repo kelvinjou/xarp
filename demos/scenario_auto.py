@@ -27,12 +27,14 @@ def getModel(current_model):
 
 
 # Global variables to track current scenario
-start_pk = 3  # starting pk value (not row index)
+start_pk = 4  # starting pk value (not row index)
 num_rows = 2  # automated workflow only processes start + n scenarios
 
 current_request = ""
 current_mode = ""
 current_model = ""
+current_log_file = ""
+current_timestamp = ""
 
 # ======================== PROMPTS ========================
 xarp_system_prompt = """
@@ -60,49 +62,75 @@ PROMPTS_BY_MODE = {
     "base": baseline_system_prompt,
 }
 
+def log_step_immediately(step_log):
+    """Log a step to CSV as soon as it completes - uses step_callbacks"""
+    global current_pk, current_request, current_mode, current_model, current_log_file, current_timestamp
+    
+    results_path = 'demos/results.csv'
+    needs_header = not os.path.exists(results_path)
+    
+    # Extract data from step log object
+    step_number = getattr(step_log, 'step_number', '?')
+    
+    # Get token usage and timing info
+    token_usage = getattr(step_log, 'token_usage', None)
+    timing = getattr(step_log, 'timing', None)
+    
+    print(f"\n[LOGGING] Step {step_number} - Type: {type(step_log).__name__}")
+    print(f"[LOGGING] Has token_usage: {token_usage is not None}")
+    print(f"[LOGGING] Has timing: {timing is not None}")
+    
+    if token_usage and timing:
+        row = {
+            'id': f"{current_pk}_{current_mode}_{current_timestamp}",
+            'pk': current_pk,
+            'mode': current_mode,
+            'model': current_model,
+            'request': current_request[:20] if len(current_request) > 20 else current_request,
+            'step_number': step_number,
+            'input_tokens': token_usage.get('input_tokens', 0) if isinstance(token_usage, dict) else getattr(token_usage, 'input_tokens', 0),
+            'output_tokens': token_usage.get('output_tokens', 0) if isinstance(token_usage, dict) else getattr(token_usage, 'output_tokens', 0),
+            'duration': timing.get('duration', 0) if isinstance(timing, dict) else getattr(timing, 'duration', 0),
+            'log_file': current_log_file
+        }
+        pd.DataFrame([row]).to_csv(
+            results_path,
+            mode='a',
+            header=needs_header,
+            index=False
+        )
+        print(f"✓✓✓ Step {step_number} LOGGED to {results_path}")
+    else:
+        print(f"[LOGGING] Step {step_number} skipped - missing token_usage or timing")
+
+
 def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
-    global current_pk, current_request, current_mode, current_model
+    global current_pk, current_request, current_mode, current_model, current_log_file, current_timestamp
     mode = params.get('mode') if isinstance(params, dict) else None
     mode = mode or current_mode or "xarp"
     custom_system_prompt = PROMPTS_BY_MODE.get(mode, xarp_system_prompt)
     agent.prompt_templates["system_prompt"] = custom_system_prompt + agent.prompt_templates["system_prompt"]
     
+    # Register callback to log each step DURING execution
+    print(f"[SETUP] Registering step callback for immediate logging")
+    from smolagents import ActionStep
+    
+    # Register the callback - this will be called after each step
+    agent.step_callbacks.register(ActionStep, log_step_immediately)
+    
     xr.say("Starting scenario...")
+    
+    # Run the agent - steps will be logged in real-time via callback
     answer = agent.run(current_request, return_full_result=True)
     
-    # Append each step to CSV immediately after processing
-    results_path = 'demos/results.csv'
-    needs_header = not os.path.exists(results_path)
-    steps_logged = 0
-    for step_dict in answer.steps:
-        if 'token_usage' in step_dict and step_dict['token_usage']:
-            row = {
-                'pk': current_pk,
-                'mode': current_mode,
-                'model': current_model,
-                'request': current_request[:20],
-                'step_number': step_dict.get('step_number', '?'),
-                'input_tokens': step_dict['token_usage']['input_tokens'],
-                'output_tokens': step_dict['token_usage']['output_tokens'],
-                'duration': step_dict['timing']['duration']
-            }
-            pd.DataFrame([row]).to_csv(
-                results_path,
-                mode='a',
-                header=needs_header,
-                index=False
-            )
-            needs_header = False
-            steps_logged += 1
-    
-    xr.write(f"Scenario {current_pk} completed! {steps_logged} steps logged.")
+    xr.write(f"Scenario {current_pk} completed!")
     
     print(f"Scenario {current_pk} execution complete.")
-    sys.exit(0)
+    # sys.exit(0)
 
 
 def run_scenario(pk, scenario_text, mode, model_name):
-    global current_pk, current_request, current_mode, current_model
+    global current_pk, current_request, current_mode, current_model, current_log_file, current_timestamp
     current_pk = pk
     current_request = scenario_text
     current_mode = mode
@@ -113,7 +141,9 @@ def run_scenario(pk, scenario_text, mode, model_name):
     
     # Create log file for this scenario
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = f'demos/logs/s{current_pk}_{current_mode}_{timestamp}.txt'
+    current_timestamp = timestamp
+    log_file = f'demos/logs/{current_pk}_{current_mode}_{timestamp}.txt'
+    current_log_file = log_file
     
     # Redirect stdout and stderr to both console and file
     class TeeOutput:
@@ -143,7 +173,7 @@ def run_scenario(pk, scenario_text, mode, model_name):
 
             print(current_mode)
             if current_mode == "xarp":
-                show_qrcode_link()
+                # show_qrcode_link()
                 run_xr_agent(
                     xr_agent_app,
                     getModel(current_model=current_model),
