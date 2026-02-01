@@ -14,7 +14,6 @@ model = OpenAIServerModel(
     
     # api_key="lm-studio",
     # api_base="http://192.168.4.71:1234/v1" # api_base="http://169.254.167.39:1234/v1" # optional (use if custom endpoint)
-
 )
 
 custom_system_prompt = """

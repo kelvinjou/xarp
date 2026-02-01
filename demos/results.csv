@@ -1,5 +1,9 @@
-
-1, xarp, mistralai/devstral-small-2-2512 ,Anchor a box to the ,1,3544,15,0.7893960475921631
-1, xarp, mistralai/devstral-small-2-2512 ,Anchor a box to the ,2,3773,165,3.5991458892822266
-1, xarp, mistralai/devstral-small-2-2512 ,Anchor a box to the ,3,3821,15,0.6316158771514893
-1, xarp, mistralai/devstral-small-2-2512 ,Anchor a box to the ,4,3821,181,3.9878499507904053
+pk,mode,model,request,step_number,input_tokens,output_tokens,duration
+1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,1,3901,15,2.4557409286499023
+1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,2,4130,169,4.404479026794434
+1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,3,4527,20,0.7810492515563965
+2,base,mistralai/devstral-small-2-2512,Anchor a box to the ,1,2744,790,19.843867778778076
+2,base,mistralai/devstral-small-2-2512,Anchor a box to the ,2,4403,205,5.9660491943359375
+2,base,mistralai/devstral-small-2-2512,Anchor a box to the ,3,4864,516,12.793081760406494
+2,base,mistralai/devstral-small-2-2512,Anchor a box to the ,4,5987,296,7.915824890136719
+2,base,mistralai/devstral-small-2-2512,Anchor a box to the ,5,6637,95,2.7028048038482666

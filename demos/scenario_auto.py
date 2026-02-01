@@ -9,15 +9,35 @@ from xarp.server import show_qrcode_link
 
 api_key = os.getenv('OPENAI_API_KEY')
 lm_studio = os.getenv('LM_STUDIO_KEY')
-model_id = "mistralai/devstral-small-2-2512"
 
-model = OpenAIServerModel(
-    model_id=model_id,
-    api_key=lm_studio,
-    api_base="http://128.111.28.74:1234/v1"
-)
+# hardcoded, unused
+# model_id = "mistralai/devstral-small-2-2512"
+# model = OpenAIServerModel(
+#     model_id=model_id,
+#     api_key=lm_studio,
+#     api_base="http://128.111.28.74:1234/v1"
+# )
 
-custom_system_prompt = """
+def getModel(current_model):
+    return OpenAIServerModel(
+        model_id=current_model,
+        api_key=lm_studio,
+        api_base="http://128.111.28.74:1234/v1"
+    )
+
+
+# Set your starting index here (0-based)
+input_csv_start_idx = 1 # starts from idx=0 CHANGE THIS IF NEEDED
+num_rows = 2 # automated workflow only processes start + n scenarios
+
+# Global variables to track current scenario
+current_pk = 0
+current_request = ""
+current_mode = ""
+current_model = ""
+
+# ======================== PROMPTS ========================
+xarp_system_prompt = """
 You are an agent with extended reality tools. You can sense the environment and display information.
 Before asking me about for extra information, use your tools to understand the context.
 The user cannot read the output of "print" functions, use the "write" or "say" tools instead.
@@ -25,23 +45,29 @@ The user cannot read the output of "print" functions, use the "write" or "say" t
 When you have successfully completed the user's request by calling the appropriate tools,
 immediately return your final answer. Do not wait for confirmation or try to verify the results.
 """
+baseline_system_prompt = """
+You are an agent with extended reality tools. You can sense the environment and display information.
+Before asking me about for extra information, use your tools to understand the context.
+The user cannot read the output of "print" functions, use the "write" or "say" tools instead.
 
-# Set your starting index here (0-based)
-input_csv_start_idx = 1  # starts from idx=0 CHANGE THIS IF NEEDED
-num_rows = 2 # flow only lasts 2 scenarios
+CRITICAL OUTPUT FORMAT (CodeAgent):
+- Respond with a single Python tool call only (no prose, no lists, no explanations).
+- Always call baseline_code(...) exactly once.
+- The response must be valid Python that CodeAgent can parse.
+- Wrap the full C# source inside triple-quoted string literals within baseline_code(...).
+"""
 
-# Global variables to track current scenario
-current_scenario_number = 0 
-current_request = ""
-current_mode = ""
-current_model = ""
+PROMPTS_BY_MODE = {
+    "xarp": xarp_system_prompt,
+    "base": baseline_system_prompt,
+}
 
 def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
-    global current_scenario_number, current_request, current_mode, current_model
-    
+    global current_pk, current_request, current_mode, current_model
+    mode = params.get('mode') if isinstance(params, dict) else None
+    mode = mode or current_mode or "xarp"
+    custom_system_prompt = PROMPTS_BY_MODE.get(mode, xarp_system_prompt)
     agent.prompt_templates["system_prompt"] = custom_system_prompt + agent.prompt_templates["system_prompt"]
-    # Disable periodic image display on screen
-    # xr.image().obj.show()
     
     xr.say("Starting scenario...")
     answer = agent.run(current_request, return_full_result=True)
@@ -51,7 +77,7 @@ def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
     for step_dict in answer.steps:
         if 'token_usage' in step_dict and step_dict['token_usage']:
             step_rows.append({
-                'scenario_number': current_scenario_number,
+                'pk': current_pk,
                 'mode': current_mode,
                 'model': current_model,
                 'request': current_request[:20],
@@ -66,15 +92,15 @@ def xr_agent_app(xr: SyncXR, agent: MultiStepAgent, params):
         results_df = pd.DataFrame(step_rows)
         results_df.to_csv('demos/results.csv', mode='a', header=not os.path.exists('demos/results.csv'), index=False)
     
-    xr.write(f"Scenario {current_scenario_number} completed! {len(step_rows)} steps logged.")
+    xr.write(f"Scenario {current_pk} completed! {len(step_rows)} steps logged.")
     
-    print(f"Scenario {current_scenario_number} execution complete.")
+    print(f"Scenario {current_pk} execution complete.")
     sys.exit(0)
 
 
-def run_scenario(scenario_number, scenario_text, mode, model_name):
-    global current_scenario_number, current_request, current_mode, current_model
-    current_scenario_number = scenario_number
+def run_scenario(pk, scenario_text, mode, model_name):
+    global current_pk, current_request, current_mode, current_model
+    current_pk = pk
     current_request = scenario_text
     current_mode = mode
     current_model = model_name
@@ -84,7 +110,7 @@ def run_scenario(scenario_number, scenario_text, mode, model_name):
     
     # Create log file for this scenario
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_file = f'demos/logs/s{scenario_number}_{current_mode}_{timestamp}.txt'
+    log_file = f'demos/logs/s{current_pk}_{current_mode}_{timestamp}.txt'
     
     # Redirect stdout and stderr to both console and file
     class TeeOutput:
@@ -107,51 +133,60 @@ def run_scenario(scenario_number, scenario_text, mode, model_name):
         original_stderr = sys.stderr
         sys.stdout = TeeOutput(original_stdout, f)
         sys.stderr = TeeOutput(original_stderr, f)
-        
         try:
-            print(f"=== Scenario {scenario_number} started at {datetime.now()} ===")
+            print(f"=== Scenario {current_pk} started at {datetime.now()} ===")
             print(f"Request: {scenario_text[:100]}...")
             print("="*80)
-            show_qrcode_link()
-            run_xr_agent(xr_agent_app, model)
+
+            print(current_mode)
+            if current_mode == "xarp":
+                show_qrcode_link()
+            if current_mode == "xarp":
+                run_xr_agent(xr_agent_app, getModel(current_model=current_model))
+            else:
+                run_xr_agent(xr_agent_app, getModel(current_model=current_model), allowed_tools=["baseline_code"])
         except SystemExit:
             pass  # Normal exit from xr_agent_app
         finally:
             print("="*80)
-            print(f"=== Scenario {scenario_number} ended at {datetime.now()} ===")
+            print(f"=== Scenario {current_pk} ended at {datetime.now()} ===")
             print(f"Log saved to: {log_file}")
             sys.stdout = original_stdout
             sys.stderr = original_stderr
 
 
+
 if __name__ == '__main__':
     # Read CSV with scenarios
-    df = pd.read_csv("demos/xarp_inputs.csv")
+    df = pd.read_csv("demos/xarp_inputs.csv", skipinitialspace=True)
     df.columns = df.columns.str.strip()
     
     # Clean up the Scenario column (remove leading/trailing spaces)
     df['Scenario'] = df['Scenario'].str.strip()
-    
-
+    df['Mode'] = df['Mode'].astype(str).str.strip()
     
     # Iterate through the desired slice only
     for i, (idx, row) in enumerate(df.iloc[input_csv_start_idx:input_csv_start_idx+num_rows].iterrows()):
-        scenario_number = i + 1
+        pk_value = row.get('pk')
+        if pk_value is None or (isinstance(pk_value, float) and pd.isna(pk_value)):
+            raise ValueError("Missing pk value for scenario row; cannot map output without pk.")
+        pk = int(pk_value)
         scenario_text = row['Scenario']
         mode = row['Mode']
         model_name = row['Model']
         
+        
         print(f"\n{'='*80}")
-        print(f"Starting Scenario {scenario_number}/{len(df)}")
+        print(f"Starting Scenario {i + 1}/{len(df)} (pk={pk})")
         print(f"Mode: {mode}, Model: {model_name}")
         print(f"{'='*80}\n")
         
         # Run the scenario
-        run_scenario(scenario_number, scenario_text, mode, model_name)
+        run_scenario(pk, scenario_text, mode, model_name)
         
         # Clear terminal for next scenario
         os.system('clear' if os.name == 'posix' else 'cls')
         
-        print(f"Scenario {scenario_number} completed. Ready for next scenario...")
+        print(f"Scenario {pk} completed. Ready for next scenario...")
         input("Press Enter to continue to the next scenario...")
         os.system('clear' if os.name == 'posix' else 'cls')
