@@ -22,12 +22,13 @@ def getModel(current_model):
     return OpenAIServerModel(
         model_id=current_model,
         api_key=lm_studio,
+        # api_key=api_key
         api_base="http://128.111.28.74:1234/v1"
     )
 
 
 # Global variables to track current scenario
-start_pk = 4  # starting pk value (not row index)
+start_pk = 19  # starting pk value (not row index)
 num_rows = 2  # automated workflow only processes start + n scenarios
 
 current_request = ""

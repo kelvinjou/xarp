@@ -9,7 +9,75 @@
 3_xarp_20260201_135654,3,xarp,mistralai/devstral-small-2-2512,Generate two continu,1,3352,15,1.5113468170166016,demos/logs/3_xarp_20260201_135654.txt
 3_xarp_20260201_135654,3,xarp,mistralai/devstral-small-2-2512,Generate two continu,2,3582,166,8.938127994537354,demos/logs/3_xarp_20260201_135654.txt
 3_xarp_20260201_135654,3,xarp,mistralai/devstral-small-2-2512,Generate two continu,3,3973,195,81.61046719551086,demos/logs/3_xarp_20260201_135654.txt
-
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,1,2736,276,9.052164077758789,demos/logs/4_base_20260201_140121.txt
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,2,3779,286,8.57810091972351,demos/logs/4_base_20260201_140121.txt
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,3,4449,21,1.1048588752746582,demos/logs/4_base_20260201_140121.txt
+5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,1,3354,17,1.0366430282592773,demos/logs/5_xarp_20260201_142322.txt
+5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,2,3444,25,0.8911952972412109,demos/logs/5_xarp_20260201_142322.txt
+5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,3,3539,17,0.7236371040344238,demos/logs/5_xarp_20260201_142322.txt
+5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,4,11322,278,13.873366117477417,demos/logs/5_xarp_20260201_142322.txt
+5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,5,12017,17,1.0583438873291016,demos/logs/5_xarp_20260201_142322.txt
+6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,1,2738,279,8.903472900390625,demos/logs/6_base_20260201_142810.txt
+6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,2,3778,344,10.027438879013062,demos/logs/6_base_20260201_142810.txt
+6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,3,4514,457,12.313055992126465,demos/logs/6_base_20260201_142810.txt
+6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,4,5496,270,7.925940990447998,demos/logs/6_base_20260201_142810.txt
+7_xarp_20260201_150707,7,xarp,mistralai/devstral-small-2-2512,display a yellow 2D ,1,3362,169,4.125756025314331,demos/logs/7_xarp_20260201_150707.txt
+8_base_20260201_151736,8,base,mistralai/devstral-small-2-2512,display a yellow 2D ,1,2750,374,11.161507844924927,demos/logs/8_base_20260201_151736.txt
+8_base_20260201_151736,8,base,mistralai/devstral-small-2-2512,display a yellow 2D ,2,3976,386,10.569653987884521,demos/logs/8_base_20260201_151736.txt
+8_base_20260201_151736,8,base,mistralai/devstral-small-2-2512,display a yellow 2D ,3,4855,27,1.1644768714904785,demos/logs/8_base_20260201_151736.txt
+9_xarp_20260201_152043,9,xarp,mistralai/devstral-small-2-2512,Place a medicine bot,1,3540,370,9.672982215881348,demos/logs/9_xarp_20260201_152043.txt
+9_xarp_20260201_152043,9,xarp,mistralai/devstral-small-2-2512,Place a medicine bot,2,4689,370,9.286711692810059,demos/logs/9_xarp_20260201_152043.txt
+9_xarp_20260201_152043,9,xarp,mistralai/devstral-small-2-2512,Place a medicine bot,3,6152,370,9.717304944992065,demos/logs/9_xarp_20260201_152043.txt
+9_xarp_20260201_152043,9,xarp,mistralai/devstral-small-2-2512,Place a medicine bot,4,7929,370,10.262330055236816,demos/logs/9_xarp_20260201_152043.txt
+10_base_20260201_152504,10,base,mistralai/devstral-small-2-2512,Place a medicine bot,1,2924,1598,38.48956489562988,demos/logs/10_base_20260201_152504.txt
+10_base_20260201_152504,10,base,mistralai/devstral-small-2-2512,Place a medicine bot,2,7621,1584,41.123409271240234,demos/logs/10_base_20260201_152504.txt
+10_base_20260201_152504,10,base,mistralai/devstral-small-2-2512,Place a medicine bot,3,12357,2540,66.90083193778992,demos/logs/10_base_20260201_152504.txt
+10_base_20260201_152504,10,base,mistralai/devstral-small-2-2512,Place a medicine bot,4,18625,2543,70.51837611198425,demos/logs/10_base_20260201_152504.txt
+11_xarp_20260201_155715,11,xarp,mistralai/devstral-small-2-2512,For 20 seconds the s,1,3369,154,4.204204082489014,demos/logs/11_xarp_20260201_155715.txt
+11_xarp_20260201_155715,11,xarp,mistralai/devstral-small-2-2512,For 20 seconds the s,2,3792,157,4.273488759994507,demos/logs/11_xarp_20260201_155715.txt
+11_xarp_20260201_155715,11,xarp,mistralai/devstral-small-2-2512,For 20 seconds the s,3,4321,160,24.48521900177002,demos/logs/11_xarp_20260201_155715.txt
+11_xarp_20260201_155715,11,xarp,mistralai/devstral-small-2-2512,For 20 seconds the s,4,4716,24,1.1811320781707764,demos/logs/11_xarp_20260201_155715.txt
+11_xarp_20260201_155715,11,xarp,mistralai/devstral-small-2-2512,For 20 seconds the s,5,4809,15,0.5219981670379639,demos/logs/11_xarp_20260201_155715.txt
+12_base_20260201_160311,12,base,mistralai/devstral-small-2-2512,For 20 seconds the s,1,2765,584,15.43376612663269,demos/logs/12_base_20260201_160311.txt
+12_base_20260201_160311,12,base,mistralai/devstral-small-2-2512,For 20 seconds the s,2,3930,746,17.59842276573181,demos/logs/12_base_20260201_160311.txt
+12_base_20260201_160311,12,base,mistralai/devstral-small-2-2512,For 20 seconds the s,3,5915,660,15.95592713356018,demos/logs/12_base_20260201_160311.txt
+13_xarp_20260201_162414,13,xarp,mistralai/devstral-small-2-2512,Generate a grid of 2,1,3443,367,9.395050048828125,demos/logs/13_xarp_20260201_162414.txt
+13_xarp_20260201_162414,13,xarp,mistralai/devstral-small-2-2512,Generate a grid of 2,2,4259,239,5.765232086181641,demos/logs/13_xarp_20260201_162414.txt
+13_xarp_20260201_162414,13,xarp,mistralai/devstral-small-2-2512,Generate a grid of 2,3,5051,242,30.515350818634033,demos/logs/13_xarp_20260201_162414.txt
+14_base_20260201_162716,14,base,mistralai/devstral-small-2-2512,Generate a grid of 2,1,2827,850,20.14192509651184,demos/logs/14_base_20260201_162716.txt
+14_base_20260201_162716,14,base,mistralai/devstral-small-2-2512,Generate a grid of 2,2,4529,278,7.228151082992554,demos/logs/14_base_20260201_162716.txt
+14_base_20260201_162716,14,base,mistralai/devstral-small-2-2512,Generate a grid of 2,3,5073,131,3.247535228729248,demos/logs/14_base_20260201_162716.txt
+
+15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,1,2759,300,7.2966578006744385,demos/logs/15_base_20260201_172827.txt
+15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,2,4005,374,9.24259614944458,demos/logs/15_base_20260201_172827.txt
+15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,3,4858,43,1.4635629653930664,demos/logs/15_base_20260201_172827.txt
+16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,1,3375,444,10.180782079696655,demos/logs/16_xarp_20260201_173239.txt
+16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,2,4576,487,11.132447957992554,demos/logs/16_xarp_20260201_173239.txt
+16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,3,5874,490,11.318625926971436,demos/logs/16_xarp_20260201_173239.txt
+16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,4,7180,493,13.526883125305176,demos/logs/16_xarp_20260201_173239.txt
+
+19_base_20260201_174759,19,base,mistralai/devstral-small-2-2512,Display this remote ,1,2778,1332,30.367122173309326,demos/logs/19_base_20260201_174759.txt
+19_base_20260201_174759,19,base,mistralai/devstral-small-2-2512,Display this remote ,2,5510,1474,33.50338697433472,demos/logs/19_base_20260201_174759.txt
+19_base_20260201_174759,19,base,mistralai/devstral-small-2-2512,Display this remote ,3,9084,1431,33.432515144348145,demos/logs/19_base_20260201_174759.txt
+19_base_20260201_174759,19,base,mistralai/devstral-small-2-2512,Display this remote ,4,12493,391,10.736082792282104,demos/logs/19_base_20260201_174759.txt
+19_base_20260201_174759,19,base,mistralai/devstral-small-2-2512,Display this remote ,5,13331,379,16.365280866622925,demos/logs/19_base_20260201_174759.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,1,2778,28,1.2853782176971436,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,2,2954,28,0.7919838428497314,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,3,3130,28,0.7991559505462646,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,4,3306,28,0.784796953201294,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,5,3482,28,0.7766318321228027,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,6,3658,28,0.7802729606628418,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,7,3834,28,0.7910001277923584,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,8,4010,28,0.7963912487030029,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,9,4186,28,0.898209810256958,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,10,4362,28,0.9190728664398193,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,11,4540,28,1.0203652381896973,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,12,4718,28,0.815436601638794,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,13,4896,28,0.8150680065155029,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,14,5074,28,0.8205058574676514,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,15,5252,28,0.8984682559967041,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,16,5430,28,0.8054008483886719,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,17,5608,28,0.8081769943237305,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,18,5786,28,0.8136000633239746,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,19,5964,28,0.8058369159698486,demos/logs/19_base_20260201_175127.txt
+19_base_20260201_175127,19,base,mistralai/devstral-small-2-2512,Display this remote ,20,6142,28,0.8057489395141602,demos/logs/19_base_20260201_175127.txt
