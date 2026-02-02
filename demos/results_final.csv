@@ -1,3 +1,4 @@
+pk,mode,model,request,step_number,input_tokens,output_tokens,duration,log_path
 1_xarp_20260201_133204,1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,1,3360,15,0.8705289363861084,demos/logs/1_xarp_20260201_133204.txt
 1_xarp_20260201_133204,1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,2,3595,169,4.578089952468872,demos/logs/1_xarp_20260201_133204.txt
 1_xarp_20260201_133204,1,xarp,mistralai/devstral-small-2-2512,Anchor a box to the ,3,3992,20,0.8797030448913574,demos/logs/1_xarp_20260201_133204.txt
