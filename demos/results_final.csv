@@ -13,11 +13,8 @@ pk,mode,model,request,step_number,input_tokens,output_tokens,duration,log_path
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,1,2736,276,9.052164077758789,demos/logs/4_base_20260201_140121.txt
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,2,3779,286,8.57810091972351,demos/logs/4_base_20260201_140121.txt
 4_base_20260201_140121,4,base,mistralai/devstral-small-2-2512,Generate two continu,3,4449,21,1.1048588752746582,demos/logs/4_base_20260201_140121.txt
-5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,1,3354,17,1.0366430282592773,demos/logs/5_xarp_20260201_142322.txt
-5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,2,3444,25,0.8911952972412109,demos/logs/5_xarp_20260201_142322.txt
-5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,3,3539,17,0.7236371040344238,demos/logs/5_xarp_20260201_142322.txt
-5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,4,11322,278,13.873366117477417,demos/logs/5_xarp_20260201_142322.txt
-5_xarp_20260201_142322,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,5,12017,17,1.0583438873291016,demos/logs/5_xarp_20260201_142322.txt
+5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,1,3364,17,0.9546818733215332,demos/logs/5_xarp_20260203_121932.txt
+5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,2,11125,352,15.4944167137146,demos/logs/5_xarp_20260203_121932.txt
 6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,1,2738,279,8.903472900390625,demos/logs/6_base_20260201_142810.txt
 6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,2,3778,344,10.027438879013062,demos/logs/6_base_20260201_142810.txt
 6_base_20260201_142810,6,base,mistralai/devstral-small-2-2512,Place a blue sphere ,3,4514,457,12.313055992126465,demos/logs/6_base_20260201_142810.txt
@@ -51,9 +48,44 @@ pk,mode,model,request,step_number,input_tokens,output_tokens,duration,log_path
 15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,1,2759,300,7.2966578006744385,demos/logs/15_base_20260201_172827.txt
 15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,2,4005,374,9.24259614944458,demos/logs/15_base_20260201_172827.txt
 15_base_20260201_172827,15,base,mistralai/devstral-small-2-2512,Initially place only,3,4858,43,1.4635629653930664,demos/logs/15_base_20260201_172827.txt
-
 16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,1,3375,488,11.997118949890137,demos/logs/16_xarp_20260203_120246.txt
 16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,2,4672,491,12.54771089553833,demos/logs/16_xarp_20260203_120246.txt
 16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,3,6219,494,17.55713200569153,demos/logs/16_xarp_20260203_120246.txt
-5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,1,3364,17,0.9546818733215332,demos/logs/5_xarp_20260203_121932.txt
-5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,2,11125,352,15.4944167137146,demos/logs/5_xarp_20260203_121932.txt
+
+17_xarp_20260205_083506,17,xarp,mistralai/devstral-small-2-2512,Create a sun out of ,1,3353,415,41.747727155685425,demos/logs/17_xarp_20260205_083506.txt
+17_xarp_20260205_083506,17,xarp,mistralai/devstral-small-2-2512,Create a sun out of ,2,4217,305,13.895636081695557,demos/logs/17_xarp_20260205_083506.txt
+18_base_20260205_083150,18,base,mistralai/devstral-small-2-2512,Create a sun out of ,1,2737,530,16.642999172210693,demos/logs/18_base_20260205_083150.txt
+18_base_20260205_083150,18,base,mistralai/devstral-small-2-2512,Create a sun out of ,2,3769,355,9.473036050796509,demos/logs/18_base_20260205_083150.txt
+18_base_20260205_083150,18,base,mistralai/devstral-small-2-2512,Create a sun out of ,3,4536,310,8.503071069717407,demos/logs/18_base_20260205_083150.txt
+18_base_20260205_083150,18,base,mistralai/devstral-small-2-2512,Create a sun out of ,4,5181,486,12.747397184371948,demos/logs/18_base_20260205_083150.txt
+18_base_20260205_083150,18,base,mistralai/devstral-small-2-2512,Create a sun out of ,5,6237,170,4.886822938919067,demos/logs/18_base_20260205_083150.txt
+19_xarp_20260205_084446,19,xarp,mistralai/devstral-small-2-2512,Create a sphere that,1,3356,70,2.318791151046753,demos/logs/19_xarp_20260205_084446.txt
+19_xarp_20260205_084446,19,xarp,mistralai/devstral-small-2-2512,Create a sphere that,2,3541,162,4.258347988128662,demos/logs/19_xarp_20260205_084446.txt
+19_xarp_20260205_084446,19,xarp,mistralai/devstral-small-2-2512,Create a sphere that,3,4135,164,20.972201824188232,demos/logs/19_xarp_20260205_084446.txt
+20_base_20260205_085227,20,base,mistralai/devstral-small-2-2512,Create a sphere that,1,2740,425,11.50404405593872,demos/logs/20_base_20260205_085227.txt
+20_base_20260205_085227,20,base,mistralai/devstral-small-2-2512,Create a sphere that,2,4544,405,11.52783989906311,demos/logs/20_base_20260205_085227.txt
+20_base_20260205_085227,20,base,mistralai/devstral-small-2-2512,Create a sphere that,3,5468,32,1.3787798881530762,demos/logs/20_base_20260205_085227.txt
+21_xarp_20260205_090421,21,xarp,mistralai/devstral-small-2-2512,Create a fast rotati,1,3355,64,2.0666768550872803,demos/logs/21_xarp_20260205_090421.txt
+21_xarp_20260205_090421,21,xarp,mistralai/devstral-small-2-2512,Create a fast rotati,2,3528,176,4.52240777015686,demos/logs/21_xarp_20260205_090421.txt
+22_base_20260205_090651,22,base,mistralai/devstral-small-2-2512,Create a fast rotati,1,2740,202,6.500595331192017,demos/logs/22_base_20260205_090651.txt
+22_base_20260205_090651,22,base,mistralai/devstral-small-2-2512,Create a fast rotati,2,3236,27,1.0060133934020996,demos/logs/22_base_20260205_090651.txt
+23_xarp_20260205_091646,23,xarp,mistralai/devstral-small-2-2512,Create a cube that s,1,3355,176,5.037658929824829,demos/logs/23_xarp_20260205_091646.txt
+23_xarp_20260205_091646,23,xarp,mistralai/devstral-small-2-2512,Create a cube that s,2,4353,173,5.133376121520996,demos/logs/23_xarp_20260205_091646.txt
+24_base_20260205_091853,24,base,mistralai/devstral-small-2-2512,Create a cube that s,1,2739,139,4.029040813446045,demos/logs/24_base_20260205_091853.txt
+24_base_20260205_091853,24,base,mistralai/devstral-small-2-2512,Create a cube that s,2,3097,147,4.121298789978027,demos/logs/24_base_20260205_091853.txt
+24_base_20260205_091853,24,base,mistralai/devstral-small-2-2512,Create a cube that s,3,3469,147,4.294503927230835,demos/logs/24_base_20260205_091853.txt
+24_base_20260205_091853,24,base,mistralai/devstral-small-2-2512,Create a cube that s,4,3841,147,4.165086030960083,demos/logs/24_base_20260205_091853.txt
+24_base_20260205_091853,24,base,mistralai/devstral-small-2-2512,Create a cube that s,5,4213,147,4.1456358432769775,demos/logs/24_base_20260205_091853.txt
+25_xarp_20260205_093625,25,xarp,mistralai/devstral-small-2-2512,Create a cloud out o,1,3356,275,7.8801069259643555,demos/logs/25_xarp_20260205_093625.txt
+25_xarp_20260205_093625,25,xarp,mistralai/devstral-small-2-2512,Create a cloud out o,2,3957,299,32.037269115448,demos/logs/25_xarp_20260205_093625.txt
+26_base_20260205_093022,26,base,mistralai/devstral-small-2-2512,Create a cloud out o,1,2740,579,16.548410892486572,demos/logs/26_base_20260205_093022.txt
+26_base_20260205_093022,26,base,mistralai/devstral-small-2-2512,Create a cloud out o,2,3936,667,17.89006209373474,demos/logs/26_base_20260205_093022.txt
+26_base_20260205_093022,26,base,mistralai/devstral-small-2-2512,Create a cloud out o,3,5368,829,22.290107011795044,demos/logs/26_base_20260205_093022.txt
+26_base_20260205_093022,26,base,mistralai/devstral-small-2-2512,Create a cloud out o,4,7515,827,23.30781316757202,demos/logs/26_base_20260205_093022.txt
+27_xarp_20260205_094454,27,xarp,mistralai/devstral-small-2-2512,create a pendulum fr,1,3364,447,29.49437117576599,demos/logs/27_xarp_20260205_094454.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,1,2748,731,18.929986000061035,demos/logs/28_base_20260205_094917.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,2,4189,249,7.214182138442993,demos/logs/28_base_20260205_094917.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,3,4740,533,13.425305128097534,demos/logs/28_base_20260205_094917.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,4,5891,689,17.777214288711548,demos/logs/28_base_20260205_094917.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,5,7361,728,18.8048152923584,demos/logs/28_base_20260205_094917.txt
+28_base_20260205_094917,28,base,mistralai/devstral-small-2-2512,create a pendulum fr,6,8918,448,12.087252140045166,demos/logs/28_base_20260205_094917.txt
