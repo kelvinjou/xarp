@@ -54,3 +54,10 @@
 16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,2,4576,487,11.132447957992554,demos/logs/16_xarp_20260201_173239.txt
 16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,3,5874,490,11.318625926971436,demos/logs/16_xarp_20260201_173239.txt
 16_xarp_20260201_173239,16,xarp,mistralai/devstral-small-2-2512,Initially place only,4,7180,493,13.526883125305176,demos/logs/16_xarp_20260201_173239.txt
+
+16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,1,3375,488,11.997118949890137,demos/logs/16_xarp_20260203_120246.txt
+16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,2,4672,491,12.54771089553833,demos/logs/16_xarp_20260203_120246.txt
+16_xarp_20260203_120246,16,xarp,mistralai/devstral-small-2-2512,Initially place only,3,6219,494,17.55713200569153,demos/logs/16_xarp_20260203_120246.txt
+5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,1,3364,17,0.9546818733215332,demos/logs/5_xarp_20260203_121932.txt
+5_xarp_20260203_121932,5,xarp,mistralai/devstral-small-2-2512,Place a blue sphere ,2,11125,352,15.4944167137146,demos/logs/5_xarp_20260203_121932.txt
+

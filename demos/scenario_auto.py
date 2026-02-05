@@ -28,7 +28,7 @@ def getModel(current_model):
 
 
 # Global variables to track current scenario
-start_pk = 19  # starting pk value (not row index)
+start_pk = 17  # starting pk value (not row index)
 num_rows = 2  # automated workflow only processes start + n scenarios
 
 current_request = ""
@@ -224,7 +224,7 @@ if __name__ == '__main__':
     
     # Clean up the Scenario column (remove leading/trailing spaces)
     df['Scenario'] = df['Scenario'].str.strip()
-    df['Mode'] = df['Mode'].astype(str).str.strip()
+    df['mode'] = df['mode'].astype(str).str.strip()
     
     # Iterate through pk-based slice
     slice_df = df[df['pk'].astype(int) >= int(start_pk)].head(num_rows)
@@ -234,8 +234,8 @@ if __name__ == '__main__':
             raise ValueError("Missing pk value for scenario row; cannot map output without pk.")
         pk = int(pk_value)
         scenario_text = row['Scenario']
-        mode = row['Mode']
-        model_name = row['Model']
+        mode = row['mode']
+        model_name = row['model']
         
         
         print(f"\n{'='*80}")
